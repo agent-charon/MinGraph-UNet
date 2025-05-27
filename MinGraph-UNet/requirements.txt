@@ -1,0 +1,9 @@
+torch>=1.9.0
+torchvision>=0.10.0
+numpy>=1.20.0
+opencv-python>=4.5.0
+pyyaml>=5.0
+scikit-image>=0.18.0
+# Add other specific libraries if you use them, e.g., for a specific max-flow solver
+# pip install torch-scatter torch-sparse torch-cluster torch-spline-conv torch-geometric -f https://data.pyg.org/whl/torch-1.9.0+cu111.html
+# If using torch_geometric for GAT or graph ops

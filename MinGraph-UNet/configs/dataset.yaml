@@ -1,0 +1,26 @@
+
+---
+
+**`configs/dataset.yaml`**
+
+```yaml
+dataset_name: "BanginapalleMangoDataset"
+data_root: "/path/to/your/mango_dataset/" # Root directory of the dataset
+train_dir: "train/"
+val_dir: "val/"
+test_dir: "test/" # For yield estimation or final eval
+image_folder: "images/"
+mask_folder: "masks/" # For segmentation ground truth
+
+# Video data if used directly for frame extraction
+video_data_path: "/path/to/videos/"
+
+# Image dimensions (after resizing for preprocessing)
+image_height: 128
+image_width: 128
+
+# For ImageNet normalization
+mean: [0.485, 0.456, 0.406]
+std: [0.229, 0.224, 0.225]
+
+num_classes: 2 # e.g., background, mango

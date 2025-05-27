@@ -1,0 +1,43 @@
+# U-Net Configuration
+unet:
+  in_channels: 3
+  out_channels: 2 # Number of classes for segmentation (e.g., mango, background)
+  init_features: 32 # Number of features in the first conv layer
+  depth: 4 # Number of downsampling/upsampling blocks
+
+# Graph Construction
+graph_construction:
+  patch_size: 16 # Each patch becomes a node
+  # 4-connectivity is typically assumed for spatial proximity
+
+# GAT Configuration (for patch-level and region-level GATs)
+gat:
+  node_feature_dim: null # Will be determined by U-Net encoder output + processed features
+  hidden_dim: 128
+  num_heads: 4
+  output_dim: 64 # Output dimension of GAT embeddings
+  dropout: 0.1
+  alpha: 0.2 # LeakyReLU negative slope for GAT
+
+# MinCut Module (Conceptual)
+mincut:
+  # Parameters for energy function E(S) if a solver is used
+  # Or parameters for the L_partition if it's a direct loss component
+  gamma_unet_priors: 0.5 # Controls contribution of U-Net priors in edge weights for E(S) (eq. 5)
+  sigma_intensity: 10.0 # For pixel intensity differences in edge weights
+  sigma_features: 1.0  # For U-Net feature differences in edge weights
+
+# Feature Fusion and Detection Head
+fusion_detection:
+  # Input dimension will be U-Net features + GAT output features
+  fc_hidden_dim: 256
+  num_detection_outputs: 5 # e.g., (confidence, x, y, w, h) or (confidence, class_probs...)
+
+# Loss function parameters
+losses:
+  l_shape_weight: 0.1 # lambda_1
+  l_feature_weight: 0.1 # lambda_2
+  l_partition_weight: 0.5 # lambda_3
+  l_smooth_weight: 0.2 # lambda_4
+  # Margin 'm' for L_feature (hinge loss part)
+  feature_loss_margin: 1.0

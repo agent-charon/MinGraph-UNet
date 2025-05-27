@@ -1,0 +1,22 @@
+# Training Hyperparameters
+batch_size: 16
+learning_rate: 0.001
+num_epochs: 100
+optimizer: "Adam" # Options: "SGD", "Adam", "AdamW"
+sgd_momentum: 0.9 # If optimizer is SGD
+weight_decay: 0.0001
+
+# Learning rate scheduler
+lr_scheduler: "StepLR" # Options: "StepLR", "ReduceLROnPlateau", "CosineAnnealingLR"
+lr_step_size: 30 # For StepLR
+lr_gamma: 0.1 # For StepLR
+
+# Hardware
+device: "cuda" # "cuda" or "cpu"
+num_workers: 4 # For DataLoader
+
+# Checkpointing and Logging
+checkpoint_dir: "outputs/checkpoints/"
+log_dir: "outputs/logs/"
+log_interval: 10 # Log training status every N batches
+save_epoch_interval: 5 # Save model checkpoint every N epochs
